@@ -9,17 +9,30 @@ function App() {
   const APP_ID = '6d1f2104';
   const APP_KEY = '4c7c8e6fa9cac166f386697190912099';
   const [ingr, setIngr] = useState("")
+  const [submit, setSubmit] = useState("")
+  const [qty, setQty] = useState("")
+  const [unit, setUnit] = useState("")
+  const [food, setFood] = useState("")
+  const [calories, setCalories] = useState("")
 
+
+  useEffect(() => {
+    const ingrArray = ingr.split(/(\s+)/).filter(e => String(e).trim())
+    setQty(ingrArray[0])
+    setUnit(ingrArray[1])
+    setFood(ingrArray[2])
+  }, [submit])
 
   return (
     <div>
 
       <form
-        onSubmit = {(e) => {
+        onSubmit = {e => {
           e.preventDefault()
           axios.get(`https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${encodeURIComponent(ingr)}`)
                .then(res => {
                 console.log(res.data)
+                setCalories(res.data.calories)
           })
         }}
       >
@@ -29,15 +42,22 @@ function App() {
         <SearchField 
           ingr = {ingr}
           onChange = {e => setIngr(e.target.value)}
+          
         />
 
         <button type="submit"
+          onClick = {e => setSubmit(Math.random())}
         >
           Submit
         </button>
       </form>
       
-      <Chart />
+      <Chart 
+        qty = {qty}
+        unit = {unit}
+        food = {food}
+        calories = {calories}
+      />
 
     </div>
   )
