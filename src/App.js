@@ -10,17 +10,29 @@ function App() {
   const APP_KEY = '4c7c8e6fa9cac166f386697190912099';
   const [ingr, setIngr] = useState("")
   const [submit, setSubmit] = useState("")
-  const [qty, setQty] = useState("")
+  const [qty, setQty] = useState([])
   const [unit, setUnit] = useState("")
   const [food, setFood] = useState("")
   const [calories, setCalories] = useState("")
-
+  console.log(qty)
 
   useEffect(() => {
     const ingrArray = ingr.split(/(\s+)/).filter(e => String(e).trim())
-    setQty(ingrArray[0])
+  //.split(/^\d+$/)
+  const array = ingrArray.reduce(
+      (arrays, value) => (
+        isFinite(value)
+          ? arrays.push([value])
+          : arrays[arrays.length - 1].push(value),
+          arrays
+      ),
+      []
+    ) 
+
+        
     setUnit(ingrArray[1])
     setFood(ingrArray[2])
+     
   }, [submit])
 
   return (
@@ -41,8 +53,7 @@ function App() {
 
         <SearchField 
           ingr = {ingr}
-          onChange = {e => setIngr(e.target.value)}
-          
+          onChange = {e => setIngr(e.target.value)}         
         />
 
         <button type="submit"
