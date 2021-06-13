@@ -10,16 +10,17 @@ function App() {
   const APP_KEY = '4c7c8e6fa9cac166f386697190912099';
   const [ingr, setIngr] = useState("")
   const [submit, setSubmit] = useState("")
-  const [qty, setQty] = useState([])
-  const [unit, setUnit] = useState("")
-  const [food, setFood] = useState("")
-  const [calories, setCalories] = useState("")
-  console.log(qty)
+  const [calories, setCalories] = useState([])
+  const [searchResult, setSearchResult] = useState([])
+
 
   useEffect(() => {
+    const foodArrays = []
+    const foodArray = []
+    const searchArray = []
     const ingrArray = ingr.split(/(\s+)/).filter(e => String(e).trim())
-  //.split(/^\d+$/)
-  const array = ingrArray.reduce(
+
+    const array = ingrArray.reduce(
       (arrays, value) => (
         isFinite(value)
           ? arrays.push([value])
@@ -27,13 +28,33 @@ function App() {
           arrays
       ),
       []
-    ) 
+    )
 
-        
-    setUnit(ingrArray[1])
-    setFood(ingrArray[2])
-     
+    for (var i = 0; i < array.length; i++) {
+      const test = array[i].splice(2)
+      foodArrays.push(test)
+    }
+
+    for (var i=0; i < array.length; i++) {
+      const foodCombined = foodArrays[i].join('-')
+      foodArray.push(foodCombined)
+    }
+
+    for (var i=0; i < foodArray.length; i++) {
+      const a = array[i].concat(foodArray[i])
+      searchArray.push(a)
+    }
+
+    setSearchResult(searchArray)
+
+    for (var i=0; i < searchResult.length; i++) {
+      searchResult[i].push(calories[i])
+    }
+    console.log(searchResult)
+
   }, [submit])
+
+
 
   return (
     <div>
@@ -41,11 +62,15 @@ function App() {
       <form
         onSubmit = {e => {
           e.preventDefault()
-          axios.get(`https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${encodeURIComponent(ingr)}`)
-               .then(res => {
-                console.log(res.data)
-                setCalories(res.data.calories)
-          })
+          const caloriesArray = []
+          for( var i=0; i<searchResult.length; i++) {
+            const searchResultToString = searchResult[i].join(" ")
+            axios.get(`https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${encodeURIComponent(searchResultToString)}`)
+            .then(res => {
+             caloriesArray.push(res.data.calories)
+            })
+          }
+          setCalories(caloriesArray)
         }}
       >
 
@@ -63,13 +88,19 @@ function App() {
         </button>
       </form>
       
-      <Chart 
-        qty = {qty}
-        unit = {unit}
-        food = {food}
-        calories = {calories}
-      />
+      <div>
+        {searchResult.map(foodSearched => (
+          <Chart 
+            qty = {foodSearched[0]}
+            unit = {foodSearched[1]}
+            food = {foodSearched[2]}
+            calories = {foodSearched[3]}
+          />
+        ))}
 
+      </div>
+
+          
     </div>
   )
 
