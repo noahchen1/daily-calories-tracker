@@ -15,11 +15,9 @@ function App() {
 
 
   useEffect(() => {
-    const foodArrays = []
     const foodArray = []
     const searchArray = []
     const ingrArray = ingr.split(/(\s+)/).filter(e => String(e).trim())
-
     const array = ingrArray.reduce(
       (arrays, value) => (
         isFinite(value)
@@ -31,26 +29,13 @@ function App() {
     )
 
     for (var i = 0; i < array.length; i++) {
-      const test = array[i].splice(2)
-      foodArrays.push(test)
-    }
-
-    for (var i=0; i < array.length; i++) {
-      const foodCombined = foodArrays[i].join('-')
-      foodArray.push(foodCombined)
-    }
-
-    for (var i=0; i < foodArray.length; i++) {
-      const a = array[i].concat(foodArray[i])
-      searchArray.push(a)
+      const foodName = array[i].splice(2).join('-')
+      foodArray.push(foodName)
+      const wholeArray = array[i].concat(foodArray[i])
+      searchArray.push(wholeArray)
     }
 
     setSearchResult(searchArray)
-
-    for (var i=0; i < searchResult.length; i++) {
-      searchResult[i].push(calories[i])
-    }
-    console.log(searchResult)
 
   }, [submit])
 
@@ -71,6 +56,10 @@ function App() {
             })
           }
           setCalories(caloriesArray)
+          for (var i=0; i < searchResult.length; i++) {
+            searchResult[i].push(calories[i])
+          }
+          console.log(searchResult)
         }}
       >
 
