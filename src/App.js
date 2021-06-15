@@ -9,12 +9,12 @@ function App() {
   const APP_ID = '6d1f2104';
   const APP_KEY = '4c7c8e6fa9cac166f386697190912099';
   const [ingr, setIngr] = useState("")
-  const [submit, setSubmit] = useState("")
+  const [submit, setSubmit] = useState("1")
   const [calories, setCalories] = useState([])
   const [searchResult, setSearchResult] = useState([])
 
 
-  useEffect(() => {
+  function handleSubmit() {
     const foodArray = []
     const searchArray = []
     const ingrArray = ingr.split(/(\s+)/).filter(e => String(e).trim())
@@ -35,31 +35,33 @@ function App() {
       searchArray.push(wholeArray)
     }
 
-    setSearchResult(searchArray)
+    async function nutrition() {
+      const callPromises = searchArray.map((ingredient) => {
+        const searchArrayToString = [encodeURIComponent(ingredient)]
+        return axios.get(`https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${searchArrayToString}`)
+      })
 
-  }, [submit])
+      return (await Promise.all(callPromises)).map(res => res.data.calories)
+    }
+    
+    nutrition().then(res => {
+      const calorieArray = res
+      for(var i=0; i < searchArray.length; i++) {
+        searchArray[i].push(calorieArray[i])
+      }
+      setSearchResult(searchArray)
+    })
 
+  }
 
+  
 
   return (
     <div>
 
       <form
         onSubmit = {e => {
-          e.preventDefault()
-          const caloriesArray = []
-          for( var i=0; i<searchResult.length; i++) {
-            const searchResultToString = searchResult[i].join(" ")
-            axios.get(`https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${encodeURIComponent(searchResultToString)}`)
-            .then(res => {
-             caloriesArray.push(res.data.calories)
-            })
-          }
-          setCalories(caloriesArray)
-          for (var i=0; i < searchResult.length; i++) {
-            searchResult[i].push(calories[i])
-          }
-          console.log(searchResult)
+          e.preventDefault()        
         }}
       >
 
@@ -71,7 +73,7 @@ function App() {
         />
 
         <button type="submit"
-          onClick = {e => setSubmit(Math.random())}
+          onClick = {handleSubmit}
         >
           Submit
         </button>
