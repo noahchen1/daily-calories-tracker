@@ -1,5 +1,7 @@
 import axios from 'axios'
 import Chart from './Chart'
+import ChartTitle from './ChartTitle'
+import DailyValue from './DailyValue'
 import SearchField from './SearchField'
 import { useState, useEffect } from 'react'
 
@@ -12,6 +14,7 @@ function App() {
   const [submit, setSubmit] = useState("1")
   const [calories, setCalories] = useState([])
   const [searchResult, setSearchResult] = useState([])
+  const [showChartTitle, setShowChartTitle] = useState(false)
 
 
   function handleSubmit() {
@@ -29,7 +32,7 @@ function App() {
     )
 
     for (var i = 0; i < array.length; i++) {
-      const foodName = array[i].splice(2).join('-')
+      const foodName = array[i].splice(2).join(' ')
       foodArray.push(foodName)
       const wholeArray = array[i].concat(foodArray[i])
       searchArray.push(wholeArray)
@@ -51,8 +54,9 @@ function App() {
       }
       setSearchResult(searchArray)
     })
-
   }
+
+
 
   
 
@@ -61,7 +65,8 @@ function App() {
 
       <form
         onSubmit = {e => {
-          e.preventDefault()        
+          e.preventDefault()
+          setShowChartTitle(true)
         }}
       >
 
@@ -77,9 +82,11 @@ function App() {
         >
           Submit
         </button>
+
       </form>
       
       <div>
+        {showChartTitle ? <ChartTitle /> : null}
         {searchResult.map(foodSearched => (
           <Chart 
             qty = {foodSearched[0]}
@@ -88,10 +95,11 @@ function App() {
             calories = {foodSearched[3]}
           />
         ))}
-
       </div>
 
-          
+      <div>
+        <DailyValue />
+      </div>
     </div>
   )
 
