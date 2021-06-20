@@ -11,8 +11,12 @@ function App() {
   const APP_ID = '6d1f2104';
   const APP_KEY = '4c7c8e6fa9cac166f386697190912099';
   const [ingr, setIngr] = useState("")
-  const [submit, setSubmit] = useState("1")
-  const [calories, setCalories] = useState([])
+
+  const [fat, setFat] = useState([])
+  const [saturatedFat, setSaturatedFat] = useState([])
+  const [polyunsaturated, setPolyunsaturated] = useState([])
+  const [monounsaturated, setMonounsaturated] = useState([])
+  
   const [searchResult, setSearchResult] = useState([])
   const [showChartTitle, setShowChartTitle] = useState(false)
 
@@ -44,15 +48,25 @@ function App() {
         return axios.get(`https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${searchArrayToString}`)
       })
 
-      return (await Promise.all(callPromises)).map(res => res.data.calorie)
+      return (await Promise.all(callPromises)).map(res => res.data)
     }
     
-    nutrition().then(res => {
-      const calorieArray = res
+
+    nutrition().then(data => {
+
+      const dataArray = data
+      console.log(dataArray)
       for(var i=0; i < searchArray.length; i++) {
-        searchArray[i].push(calorieArray[i])
+        searchArray[i].push(dataArray[i].calories)
+        fat.push(dataArray[i].totalNutrients.FAT.quantity)
+        saturatedFat.push(dataArray[i].totalNutrients.FASAT.quantity)
+        monounsaturated.push(dataArray[i].totalNutrients.FAMS.quantity)
+        polyunsaturated.push(dataArray[i].totalNutrients.FAPU.quantity)
       }
+
+      console.log(fat)
       setSearchResult(searchArray)
+      
     })
   }
 
