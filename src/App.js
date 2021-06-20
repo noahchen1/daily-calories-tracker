@@ -43,7 +43,7 @@ function App() {
   const dailyIron = []
   const dailyPotassium = []
 
-  // Initializing constants for totaled nutrients // 
+  // Initializing useState hooks for totaled nutrients // 
 
   const [totalFat, setTotalFat] = useState("")
   const [totalSaturatedFat, setTotalSaturatedFat] = useState("")
@@ -61,6 +61,19 @@ function App() {
   const [totalIron, setTotalIron] = useState("")
   const [totalPotassium, setTotalPotassium] = useState("")
 
+  // Initializing useState hooks for totaled nutrients in %//
+
+  const [dailyTotalFat, setDailyTotalFat] = useState("")
+  const [dailyTotalSaturatedFat, setDailyTotalSaturatedFat] = useState("")
+  const [dailyTotalChloesterol, setDailyTotalChloesterol] = useState("")
+  const [dailyTotalSodium, setDailyTotalSodium] = useState("")
+  const [dailyTotalCarb, setDailyTotalCarb] = useState("")
+  const [dailyTotalFiber, setDailyTotalFiber] = useState("")
+  const [dailyTotalProtein, setDailyTotalProtein] = useState("")
+  const [dailyTotalVitaminD, setDailyTotalVitaminD] = useState("")
+  const [dailyTotalCalcium, setDailyTotalCalcium] = useState("")
+  const [dailyTotalIron, setDailyTotalIron] = useState("")
+  const [dailyTotalPotassium, setDailyTotalPotassium] = useState("")
 
 
   function handleSubmit() {
@@ -98,7 +111,7 @@ function App() {
 
       const dataArray = data
 
-      //console.log(dataArray)
+      console.log(dataArray)
 
       for(var i=0; i < searchArray.length; i++) {
         
@@ -133,21 +146,38 @@ function App() {
 
       }
       setSearchResult(searchArray)
-      setTotalFat(fat.reduce((a, b) => a + b, 0))
-      setTotalSaturatedFat(saturatedFat.reduce((a, b) => a + b, 0))
-      setTotalPolyunsaturated(polyunsaturated.reduce((a, b) => a + b, 0))
-      setTotalMonounsaturated(monounsaturated.reduce((a, b) => a + b, 0))
+
+      //Summing all elements in nutrient arrays//
+
+      setTotalFat(fat.reduce((a, b) => a + b, 0).toFixed(1))
+      setTotalSaturatedFat(saturatedFat.reduce((a, b) => a + b, 0).toFixed(1))
+      setTotalPolyunsaturated(polyunsaturated.reduce((a, b) => a + b, 0).toFixed(1))
+      setTotalMonounsaturated(monounsaturated.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalTransFat(totalMonounsaturated + totalPolyunsaturated)
-      setTotalChloesterol(chloesterol.reduce((a, b) => a + b, 0))
-      setTotalSodium(sodium.reduce((a, b) => a + b, 0))
-      setTotalCarb(carb.reduce((a, b) => a + b, 0))
-      setTotalFiber(fiber.reduce((a, b) => a + b, 0))
+      setTotalChloesterol(chloesterol.reduce((a, b) => a + b, 0).toFixed(1))
+      setTotalSodium(sodium.reduce((a, b) => a + b, 0).toFixed(1))
+      setTotalCarb(carb.reduce((a, b) => a + b, 0).toFixed(1))
+      setTotalFiber(fiber.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalSugar(sugar.reduce((a, b) => a + b, 0))
-      setTotalProtein(protein.reduce((a, b) => a + b, 0))
-      setTotalVitaminD(vitaminD.reduce((a, b) => a + b, 0))
-      setTotalCalcium(calcium.reduce((a, b) => a + b, 0))
-      setTotalIron(iron.reduce((a, b) => a + b, 0))
-      setTotalPotassium(potassium.reduce((a, b) => a + b, 0))
+      setTotalProtein(protein.reduce((a, b) => a + b, 0).toFixed(1))
+      setTotalVitaminD(vitaminD.reduce((a, b) => a + b, 0).toFixed(1))
+      setTotalCalcium(calcium.reduce((a, b) => a + b, 0).toFixed(1))
+      setTotalIron(iron.reduce((a, b) => a + b, 0).toFixed(1))
+      setTotalPotassium(potassium.reduce((a, b) => a + b, 0).toFixed(1))
+
+      //Summing all elements in nutrient arrays in %//
+      setDailyTotalFat(dailyFat.reduce((a, b) => a + b, 0).toFixed(0))
+      setDailyTotalSaturatedFat(dailySaturatedFat.reduce((a, b) => a + b, 0).toFixed(0))
+      setDailyTotalChloesterol(dailyChloesterol.reduce((a, b) => a + b, 0).toFixed(0))
+      setDailyTotalSodium(dailySodium.reduce((a, b) => a + b, 0).toFixed(0))
+      setDailyTotalCarb(dailyCarb.reduce((a, b) => a + b, 0).toFixed(0))
+      setDailyTotalFiber(dailyFiber.reduce((a, b) => a + b, 0).toFixed(0))
+      setDailyTotalProtein(dailyProtein.reduce((a, b) => a + b, 0).toFixed(0))
+      setDailyTotalVitaminD(dailyVitaminD.reduce((a, b) => a + b, 0).toFixed(0))
+      setDailyTotalCalcium(dailyCalcium.reduce((a, b) => a + b, 0).toFixed(0))
+      setDailyTotalIron(dailyIron.reduce((a, b) => a + b, 0).toFixed(0))
+      setDailyTotalPotassium(dailyPotassium.reduce((a, b) => a + b, 0).toFixed(0))
+
     })
 
   }
@@ -191,7 +221,21 @@ function App() {
       </div>
 
       <div>
-        <DailyValue />
+        <DailyValue 
+          totalFat = {totalFat}
+          saturatedFat = {totalSaturatedFat}
+          transFat = {totalTransFat}
+          cholesterol = {totalChloesterol}
+          sodium = {totalSodium}
+          carbohydrate = {totalCarb}
+          dietaryFiber = {totalFiber}
+          totalSugar = {totalSugar}
+          protein = {totalProtein}
+          vitaminD = {totalVitaminD}
+          calcium = {totalCalcium}
+          iron = {totalIron}
+          potassium = {totalPotassium}
+        />
       </div>
     </div>
   )

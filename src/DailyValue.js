@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 const NutritionContainer = styled.div `
-    border-style: solid;
     width: 40%;  
 `
 const NutritionGrid = styled.div `
