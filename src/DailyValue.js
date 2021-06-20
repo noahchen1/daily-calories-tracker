@@ -1,31 +1,71 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function DailyValue() {
+const NutritionContainer = styled.div `
+    border-style: solid;
+    width: 40%;  
+`
+const NutritionGrid = styled.div `
+    display: grid;
+    grid-template-columns: auto 50px;
+`
+
+export default function DailyValue({totalFat, saturatedFat, transFat, cholesterol, sodium, carbohydrate, dietaryFiber, totalSugar, protein, vitaminD, calcium, iron, potassium}) {
     return (
-        <div>
+        <NutritionContainer>
             <p>Daily Value</p>
-            <div>
+            
+                
                 <span>Calories</span>
                 <span>1000</span>
-                <div></div>
+               
+           
                 <p>% Daily Value</p>
-                <div>
-                    <div>
-                        <span>Total Fat</span>
-                        <span>18.3g</span>
-                        <span>10%</span>
-                    </div>
-                    <div>
-                        <span>Saturated Fat</span>
-                        <span>2g</span>
-                        <span>10%</span>
-                    </div>
-                    <div>
-                        <span>Trans Fat</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+               
+            <NutritionGrid>   
+                <span>Total Fat {totalFat}</span>
+                <span>10%</span>
+                    
+                <span>Saturated Fat {saturatedFat}</span>
+                <span>28%</span>
+                   
+                <span>Trans Fat {transFat}</span>
+                <span>3%</span>
+            
+                <span>Cholesterol {cholesterol}</span>
+                <span>0 %</span>
+             
+                <span>Sodium {sodium}</span>
+                <span>3%</span>
+                
+                <span>Total Carbohydrate {carbohydrate}</span>
+                <span>10%</span>
+               
+                <span>Dietary Fiber {dietaryFiber}</span>
+                <span>20%</span>
+                
+                <span>Total Sugars {totalSugar}</span>                
+                <span>Includes Added Sugars</span>
+               
+                <span>Protein {protein}</span>
+                <span>30%</span>
+              
+                <span>Vitamin D {vitaminD}</span>
+                <span>30%</span>
+              
+                <span>Calcium {calcium}</span>
+                <span>30%</span>
+               
+                <span>Iron {iron}</span>
+                <span>30%</span>
+             
+                <span>Potassium {potassium}</span>
+                <span>30%</span>
+            </NutritionGrid>
+
+                <p>Percent Daily Values are based on a 200 calorie diet</p>
+                
+
+        </NutritionContainer>
     )
 }

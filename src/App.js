@@ -44,7 +44,7 @@ function App() {
         return axios.get(`https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${searchArrayToString}`)
       })
 
-      return (await Promise.all(callPromises)).map(res => res.data.calories)
+      return (await Promise.all(callPromises)).map(res => res.data.calorie)
     }
     
     nutrition().then(res => {
