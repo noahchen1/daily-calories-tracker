@@ -1,70 +1,79 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const NutritionContainer = styled.div `
-    width: 40%;  
+const NutritionContainer = styled.div ` 
+    border-style: solid;
+    max-width: 500px;
+    width: 40%;
 `
 const NutritionGrid = styled.div `
     display: grid;
     grid-template-columns: auto 50px;
 `
 
-export default function DailyValue({totalFat, saturatedFat, transFat, cholesterol, sodium, carbohydrate, dietaryFiber, totalSugar, protein, vitaminD, calcium, iron, potassium}) {
+const DailyValueTittle = styled.p `
+    text-align: center;
+`
+
+export default function DailyValue({calories, totalFat, dailyTotalFat, saturatedFat, dailySaturatedFat, transFat, cholesterol, dailyCholesterol, sodium, dailySodium, carbohydrate, dailyCarb, dietaryFiber, dailyFiber, totalSugar, protein, dailyProtein, vitaminD, dailyVitaminD, calcium, dailyCalcium, iron, dailyIron, potassium, dailyPotassium}) {
     return (
         <NutritionContainer>
-            <p>Daily Value</p>
             
+            <DailyValueTittle>
+                Daily Value
+            </DailyValueTittle>
                 
-                <span>Calories</span>
-                <span>1000</span>
                
-           
-                <p>% Daily Value</p>
-               
-            <NutritionGrid>   
-                <span>Total Fat {totalFat}</span>
-                <span>10%</span>
+            <NutritionGrid>
+
+                <span><b>Calories</b></span>
+                <span>{calories}</span>
+
+                <div></div>
+                <span>% Daily Value</span>
+
+                <span><b>Total Fat</b> {totalFat}g</span>
+                <span>{dailyTotalFat}%</span>
                     
-                <span>Saturated Fat {saturatedFat}</span>
-                <span>28%</span>
+                <span><b>Saturated Fat</b> {saturatedFat}g</span>
+                <span>{dailySaturatedFat}%</span>
                    
-                <span>Trans Fat {transFat}</span>
+                <span><b>Trans Fat</b> {transFat}g</span>
                 <span>3%</span>
             
-                <span>Cholesterol {cholesterol}</span>
-                <span>0 %</span>
+                <span><b>Cholesterol</b> {cholesterol}mg</span>
+                <span>{dailyCholesterol} %</span>
              
-                <span>Sodium {sodium}</span>
-                <span>3%</span>
+                <span><b>Sodium</b> {sodium}mg</span>
+                <span>{dailySodium}%</span>
                 
-                <span>Total Carbohydrate {carbohydrate}</span>
-                <span>10%</span>
+                <span><b>Total Carbohydrate</b> {carbohydrate}g</span>
+                <span>{dailyCarb}%</span>
                
-                <span>Dietary Fiber {dietaryFiber}</span>
-                <span>20%</span>
+                <span><b>Dietary Fiber</b> {dietaryFiber}g</span>
+                <span>{dailyFiber}%</span>
                 
-                <span>Total Sugars {totalSugar}</span>                
-                <span>Includes Added Sugars</span>
+                <span><b>Total Sugars</b> {totalSugar}g</span>                
+                <div></div>
                
-                <span>Protein {protein}</span>
-                <span>30%</span>
+                <span><b>Protein</b> {protein}g</span>
+                <span>{dailyProtein}%</span>
               
-                <span>Vitamin D {vitaminD}</span>
-                <span>30%</span>
+                <span><b>Vitamin D</b> {vitaminD}µg</span>
+                <span>{dailyVitaminD}%</span>
               
-                <span>Calcium {calcium}</span>
-                <span>30%</span>
+                <span><b>Calcium</b> {calcium}mg</span>
+                <span>{dailyCalcium}%</span>
                
-                <span>Iron {iron}</span>
-                <span>30%</span>
+                <span><b>Iron</b> {iron}mg</span>
+                <span>{dailyIron}%</span>
              
-                <span>Potassium {potassium}</span>
-                <span>30%</span>
+                <span><b>Potassium</b> {potassium}mg</span>
+                <span>{dailyPotassium}%</span>
             </NutritionGrid>
 
                 <p>Percent Daily Values are based on a 200 calorie diet</p>
                 
-
         </NutritionContainer>
     )
 }

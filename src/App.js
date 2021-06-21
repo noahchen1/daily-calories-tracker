@@ -42,6 +42,7 @@ function App() {
   const dailyVitaminD = []
   const dailyIron = []
   const dailyPotassium = []
+  const dailyCalories = []
 
   // Initializing useState hooks for totaled nutrients // 
 
@@ -60,6 +61,7 @@ function App() {
   const [totalCalcium, setTotalCalcium] = useState("")
   const [totalIron, setTotalIron] = useState("")
   const [totalPotassium, setTotalPotassium] = useState("")
+  const [calories, setCalories] = useState("")
 
   // Initializing useState hooks for totaled nutrients in %//
 
@@ -117,6 +119,7 @@ function App() {
         
         searchArray[i].push(dataArray[i].calories)
 
+        dailyCalories.push(dataArray[i].calories)
         fat.push(dataArray[i].totalNutrients.FAT.quantity)
         saturatedFat.push(dataArray[i].totalNutrients.FASAT.quantity)
         monounsaturated.push(dataArray[i].totalNutrients.FAMS.quantity)
@@ -158,12 +161,13 @@ function App() {
       setTotalSodium(sodium.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalCarb(carb.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalFiber(fiber.reduce((a, b) => a + b, 0).toFixed(1))
-      setTotalSugar(sugar.reduce((a, b) => a + b, 0))
+      setTotalSugar(sugar.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalProtein(protein.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalVitaminD(vitaminD.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalCalcium(calcium.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalIron(iron.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalPotassium(potassium.reduce((a, b) => a + b, 0).toFixed(1))
+      setCalories(dailyCalories.reduce((a, b) => a + b, 0))
 
       //Summing all elements in nutrient arrays in %//
       setDailyTotalFat(dailyFat.reduce((a, b) => a + b, 0).toFixed(0))
@@ -220,8 +224,14 @@ function App() {
         ))}
       </div>
 
-      <div>
-        <DailyValue 
+      <div 
+        style={{
+          display: 'flex', 
+          justifyContent: 'center'
+          }}>
+
+        <DailyValue
+          calories = {calories} 
           totalFat = {totalFat}
           saturatedFat = {totalSaturatedFat}
           transFat = {totalTransFat}
@@ -235,6 +245,18 @@ function App() {
           calcium = {totalCalcium}
           iron = {totalIron}
           potassium = {totalPotassium}
+
+          dailyTotalFat = {dailyTotalFat}
+          dailySaturatedFat = {dailyTotalSaturatedFat}
+          dailyCholesterol = {dailyTotalChloesterol}
+          dailySodium = {dailyTotalSodium}
+          dailyCarb = {dailyTotalCarb}
+          dailyFiber = {dailyTotalFiber}
+          dailyProtein = {dailyTotalProtein}
+          dailyVitaminD = {dailyTotalVitaminD}
+          dailyCalcium = {dailyTotalCalcium}
+          dailyIron = {dailyTotalIron}
+          dailyPotassium = {dailyTotalPotassium}
         />
       </div>
     </div>
