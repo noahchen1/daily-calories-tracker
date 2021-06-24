@@ -3,6 +3,7 @@ import Chart from './Chart'
 import ChartTitle from './ChartTitle'
 import DailyValue from './DailyValue'
 import SearchField from './SearchField'
+import AnalyzeButton from './AnalyzeButton'
 import { useState, useEffect } from 'react'
 
 
@@ -13,6 +14,7 @@ function App() {
   const [ingr, setIngr] = useState("")
   const [searchResult, setSearchResult] = useState([])
   const [showChartTitle, setShowChartTitle] = useState(false)
+  const [showTextArea, setShowTextArea] = useState(false)
 
   // Initializing arrays for nutrients //
   const fat = []
@@ -186,10 +188,11 @@ function App() {
 
   }
 
+  console.log(showTextArea)
 
   return (
     <div>
-
+     
       <form
         onSubmit = {e => {
           e.preventDefault()
@@ -199,16 +202,25 @@ function App() {
 
         <label>Search for food</label>
 
+        
         <SearchField 
-          ingr = {ingr}
-          onChange = {e => setIngr(e.target.value)}         
-        />
-
-        <button type="submit"
-          onClick = {handleSubmit}
+            ingr = {ingr}
+            onChange = {e => setIngr(e.target.value)}                
+        /> 
+       
+       <div 
+        style={{
+          display: "flex", 
+          justifyContent: "center",
+          margin: "20px auto"
+        }}
         >
-          Submit
-        </button>
+          <AnalyzeButton 
+              onClick = {handleSubmit}
+            />
+       </div>
+
+        
 
       </form>
       
