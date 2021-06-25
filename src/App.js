@@ -14,7 +14,7 @@ function App() {
   const [ingr, setIngr] = useState("")
   const [searchResult, setSearchResult] = useState([])
   const [showChartTitle, setShowChartTitle] = useState(false)
-  const [showTextArea, setShowTextArea] = useState(false)
+  const [showNutrition, setShowNutrition] = useState(false)
 
   // Initializing arrays for nutrients //
   const fat = []
@@ -188,8 +188,7 @@ function App() {
 
   }
 
-  console.log(showTextArea)
-
+  
   return (
     <div>
      
@@ -197,6 +196,7 @@ function App() {
         onSubmit = {e => {
           e.preventDefault()
           setShowChartTitle(true)
+          setShowNutrition(true)
         }}
       >
 
@@ -236,41 +236,44 @@ function App() {
         ))}
       </div>
 
-      <div 
-        style={{
-          display: 'flex', 
-          justifyContent: 'center'
-          }}>
+        {showNutrition ? 
+          <div 
+            style={{
+              display: 'flex', 
+              justifyContent: 'center'
+              }}>
 
-        <DailyValue
-          calories = {calories} 
-          totalFat = {totalFat}
-          saturatedFat = {totalSaturatedFat}
-          transFat = {totalTransFat}
-          cholesterol = {totalChloesterol}
-          sodium = {totalSodium}
-          carbohydrate = {totalCarb}
-          dietaryFiber = {totalFiber}
-          totalSugar = {totalSugar}
-          protein = {totalProtein}
-          vitaminD = {totalVitaminD}
-          calcium = {totalCalcium}
-          iron = {totalIron}
-          potassium = {totalPotassium}
+            <DailyValue
+              calories = {calories} 
+              totalFat = {totalFat}
+              saturatedFat = {totalSaturatedFat}
+              transFat = {totalTransFat}
+              cholesterol = {totalChloesterol}
+              sodium = {totalSodium}
+              carbohydrate = {totalCarb}
+              dietaryFiber = {totalFiber}
+              totalSugar = {totalSugar}
+              protein = {totalProtein}
+              vitaminD = {totalVitaminD}
+              calcium = {totalCalcium}
+              iron = {totalIron}
+              potassium = {totalPotassium}
 
-          dailyTotalFat = {dailyTotalFat}
-          dailySaturatedFat = {dailyTotalSaturatedFat}
-          dailyCholesterol = {dailyTotalChloesterol}
-          dailySodium = {dailyTotalSodium}
-          dailyCarb = {dailyTotalCarb}
-          dailyFiber = {dailyTotalFiber}
-          dailyProtein = {dailyTotalProtein}
-          dailyVitaminD = {dailyTotalVitaminD}
-          dailyCalcium = {dailyTotalCalcium}
-          dailyIron = {dailyTotalIron}
-          dailyPotassium = {dailyTotalPotassium}
-        />
-      </div>
+              dailyTotalFat = {dailyTotalFat}
+              dailySaturatedFat = {dailyTotalSaturatedFat}
+              dailyCholesterol = {dailyTotalChloesterol}
+              dailySodium = {dailyTotalSodium}
+              dailyCarb = {dailyTotalCarb}
+              dailyFiber = {dailyTotalFiber}
+              dailyProtein = {dailyTotalProtein}
+              dailyVitaminD = {dailyTotalVitaminD}
+              dailyCalcium = {dailyTotalCalcium}
+              dailyIron = {dailyTotalIron}
+              dailyPotassium = {dailyTotalPotassium}
+            />
+          </div>
+
+          : null}
     </div>
   )
 
