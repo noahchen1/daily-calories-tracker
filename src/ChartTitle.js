@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useState } from 'react'
+
 
 const ChartTitleGrid = styled.div `
     display: grid;
@@ -7,6 +7,12 @@ const ChartTitleGrid = styled.div `
     align-items: center;
     grid-template-columns: repeat(4, 70px);
     grid-template-rows: repeat(1, 20px);
+    animation: 1s ease forwards fade-in-left;
+
+    @keyframes fade-in-left {
+        0% {opacity: 0; transform: translateX(-20px); }
+        100% {opacity: 1; transform: translateX(0px); }
+    }
 `
 
 export default function ChartTitle() {

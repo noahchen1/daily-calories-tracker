@@ -8,6 +8,12 @@ const GridBox = styled.div`
     grid-template-columns: repeat(4, 70px);
     grid-template-rows: repeat(1, 20px);
     margin-top: 10px;
+    animation: 1s ease forwards fade-in-left;
+
+    @keyframes fade-in-left {
+        0% {opacity: 0; transform: translateX(-20px); }
+        100% {opacity: 1; transform: translateX(0px); }
+    }
 `
 
 

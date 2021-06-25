@@ -129,8 +129,9 @@ function App() {
         chloesterol.push(dataArray[i].totalNutrients.CHOLE.quantity)
         sodium.push(dataArray[i].totalNutrients.NA.quantity)
         carb.push(dataArray[i].totalNutrients.CHOCDF.quantity)
-        fiber.push(dataArray[i].totalNutrients.FIBTG.quantity)
-        sugar.push(dataArray[i].totalNutrients.SUGAR.quantity)
+        fiber.push(dataArray[i].totalNutrients.FIBTG?.quantity ?? 0)
+        //sugar.push(dataArray[i].totalNutrients.SUGAR.quantity)
+        sugar.push(dataArray[i].totalNutrients.SUGAR?.quantity ?? 0)
         protein.push(dataArray[i].totalNutrients.PROCNT.quantity)
         calcium.push(dataArray[i].totalNutrients.CA.quantity)
         iron.push(dataArray[i].totalNutrients.FE.quantity)
@@ -142,7 +143,7 @@ function App() {
         dailyChloesterol.push(dataArray[i].totalDaily.CHOLE.quantity)
         dailySodium.push(dataArray[i].totalDaily.NA.quantity)
         dailyCarb.push(dataArray[i].totalDaily.CHOCDF.quantity)
-        dailyFiber.push(dataArray[i].totalDaily.FIBTG.quantity)
+        dailyFiber.push(dataArray[i].totalDaily.FIBTG?.quantity ?? 0)
         dailyProtein.push(dataArray[i].totalDaily.PROCNT.quantity)
         dailyCalcium.push(dataArray[i].totalDaily.CA.quantity)
         dailyIron.push(dataArray[i].totalDaily.FE.quantity)
@@ -251,7 +252,7 @@ function App() {
               cholesterol = {totalChloesterol}
               sodium = {totalSodium}
               carbohydrate = {totalCarb}
-              dietaryFiber = {totalFiber}
+              dietaryFiber = {totalFiber ? 0 : totalFiber}
               totalSugar = {totalSugar}
               protein = {totalProtein}
               vitaminD = {totalVitaminD}
