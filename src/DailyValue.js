@@ -2,13 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 
 const NutritionContainer = styled.div ` 
-    border-style: solid;
     max-width: 500px;
     width: 40%;
+    margin-top: 50px;
 `
 const NutritionGrid = styled.div `
     display: grid;
     grid-template-columns: auto 50px;
+    grid-template-rows: [row1-start] 40px [row1-end] 50px [row2-end] repeat(13, 25px);
+    align-items: center;
+    
 `
 
 const DailyValueTittle = styled.p `
@@ -19,60 +22,60 @@ export default function DailyValue({calories, totalFat, dailyTotalFat, saturated
     return (
         <NutritionContainer>
             
-            <DailyValueTittle>
+            <DailyValueTittle style={{fontSize: "3em", fontWeight: "600"}}>
                 Daily Value
             </DailyValueTittle>
                 
                
             <NutritionGrid>
 
-                <span><b>Calories</b></span>
+                <span style={{fontSize: "2em"}}><b>Calories</b></span>
                 <span>{calories}</span>
 
                 <div></div>
-                <span>% Daily Value</span>
+                <span style={{fontSize: "0.8em"}}><b>% Daily Value</b></span>
 
-                <span><b>Total Fat</b> {totalFat}g</span>
+                <span><b>Total Fat</b> &nbsp; {totalFat}g</span>
                 <span>{dailyTotalFat}%</span>
                     
-                <span><b>Saturated Fat</b> {saturatedFat}g</span>
+                <span><b>Saturated Fat</b> &nbsp; {saturatedFat}g</span>
                 <span>{dailySaturatedFat}%</span>
                    
-                <span><b>Trans Fat</b> {transFat}g</span>
+                <span><b>Trans Fat</b> &nbsp; {transFat}g</span>
                 <span>3%</span>
             
-                <span><b>Cholesterol</b> {cholesterol}mg</span>
+                <span><b>Cholesterol</b> &nbsp; {cholesterol}mg</span>
                 <span>{dailyCholesterol} %</span>
              
-                <span><b>Sodium</b> {sodium}mg</span>
+                <span><b>Sodium</b> &nbsp; {sodium}mg</span>
                 <span>{dailySodium}%</span>
                 
-                <span><b>Total Carbohydrate</b> {carbohydrate}g</span>
+                <span><b>Total Carbohydrate</b> &nbsp; {carbohydrate}g</span>
                 <span>{dailyCarb}%</span>
                
-                <span><b>Dietary Fiber</b> {dietaryFiber}g</span>
+                <span><b>Dietary Fiber</b> &nbsp; {dietaryFiber}g</span>
                 <span>{dailyFiber}%</span>
                 
-                <span><b>Total Sugars</b> {totalSugar}g</span>                
+                <span><b>Total Sugars</b> &nbsp; {totalSugar}g</span>                
                 <div></div>
                
-                <span><b>Protein</b> {protein}g</span>
+                <span><b>Protein</b> &nbsp; {protein}g</span>
                 <span>{dailyProtein}%</span>
               
-                <span><b>Vitamin D</b> {vitaminD}µg</span>
+                <span><b>Vitamin D</b> &nbsp; {vitaminD}µg</span>
                 <span>{dailyVitaminD}%</span>
               
-                <span><b>Calcium</b> {calcium}mg</span>
+                <span><b>Calcium</b> &nbsp; {calcium}mg</span>
                 <span>{dailyCalcium}%</span>
                
-                <span><b>Iron</b> {iron}mg</span>
+                <span><b>Iron</b> &nbsp; {iron}mg</span>
                 <span>{dailyIron}%</span>
              
-                <span><b>Potassium</b> {potassium}mg</span>
+                <span><b>Potassium</b> &nbsp; {potassium}mg</span>
                 <span>{dailyPotassium}%</span>
             </NutritionGrid>
 
-                <p>Percent Daily Values are based on a 200 calorie diet</p>
+                <center><p style={{fontSize: "0.8em", marginTop: "50px"}}>Percent Daily Values are based on a 200 calorie diet</p></center>
                 
         </NutritionContainer>
     )

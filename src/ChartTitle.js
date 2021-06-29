@@ -5,8 +5,10 @@ const ChartTitleGrid = styled.div `
     display: grid;
     justify-content: center;
     align-items: center;
-    grid-template-columns: repeat(4, 70px);
+    grid-template-columns: repeat(4, 100px);
     grid-template-rows: repeat(1, 20px);
+    justify-items: center;
+    margin-bottom: 30px;
     animation: 1s ease forwards fade-in-left;
 
     @keyframes fade-in-left {
@@ -20,10 +22,10 @@ export default function ChartTitle() {
 
     return (
         <ChartTitleGrid>
-            <span>Qty</span>
-            <span>Unit</span>
-            <span>Food</span>
-            <span>Calories</span>
+            <span><b>Qty</b></span>
+            <span><b>Unit</b></span>
+            <span><b>Food</b></span>
+            <span><b>Calories</b></span>
         </ChartTitleGrid>
     )
 }

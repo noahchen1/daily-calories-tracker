@@ -9,6 +9,12 @@ const TextArea = styled.textarea `
     border-radius: 20px;
     animation: 1s ease forwards fade-in;
     outline: none;
+    border-color: rgba(0, 0, 0, 0.3);
+    font-size: 1em;
+    font-family: 'Roboto';
+    letter-spacing: 0.5px;
+    padding: 5px 0 5px 10px;
+
 
     @keyframes fade-in {
         0% {opacity: 0; transform: translateY(-10px); }
