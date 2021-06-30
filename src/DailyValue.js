@@ -15,7 +15,7 @@ const NutritionContainer = styled.div `
 const NutritionGrid = styled.div `
     display: grid;
     grid-template-columns: auto 50px;
-    grid-template-rows: [row1-start] 40px [row1-end] 50px [row2-end] repeat(13, 25px);
+    grid-template-rows: [row1-start] 40px [row1-end] 80px [row2-end] repeat(13, 25px);
     align-items: center;
     
 `
@@ -36,7 +36,7 @@ export default function DailyValue({calories, totalFat, dailyTotalFat, saturated
             <NutritionGrid>
 
                 <span style={{fontSize: "2em"}}><b>Calories</b></span>
-                <span>{calories}</span>
+                <span style={{fontSize: "2em", fontWeight: "800"}}>{calories}</span>
 
                 <div></div>
                 <span style={{fontSize: "0.8em"}}><b>% Daily Value</b></span>
