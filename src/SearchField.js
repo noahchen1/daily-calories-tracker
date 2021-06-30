@@ -36,6 +36,8 @@ const handleClick = (e) => {
 }
 
 
+
+
 export default function SearchField({ingr, onChange}) {
 
     return (
@@ -45,9 +47,8 @@ export default function SearchField({ingr, onChange}) {
                 value = {ingr}
                 onChange = {onChange}
                 onClick = {handleClick}
-                placeholder = "1 whole apple 
-2 oz pizza
-3 oz chicken thighs">
+                placeholder = '1 whole apple'
+            >
             </TextArea>
         </div>
     )
