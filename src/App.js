@@ -4,10 +4,22 @@ import ChartTitle from './ChartTitle'
 import DailyValue from './DailyValue'
 import SearchField from './SearchField'
 import AnalyzeButton from './AnalyzeButton'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
+
+
 
 
 function App() {
+
+  const isDesktop = useMediaQuery({
+    query: '(min-width: 450px) and (max-width: 10679px)'
+  })
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 450px)'
+  })
+
 
   const APP_ID = '6d1f2104';
   const APP_KEY = '4c7c8e6fa9cac166f386697190912099';
@@ -115,8 +127,6 @@ function App() {
 
       const dataArray = data
 
-      console.log(dataArray)
-
       for(var i=0; i < searchArray.length; i++) {
         
         searchArray[i].push(dataArray[i].calories)
@@ -130,7 +140,6 @@ function App() {
         sodium.push(dataArray[i].totalNutrients.NA?.quantity ?? 0)
         carb.push(dataArray[i].totalNutrients.CHOCDF?.quantity ?? 0)
         fiber.push(dataArray[i].totalNutrients.FIBTG?.quantity ?? 0)
-        //sugar.push(dataArray[i].totalNutrients.SUGAR.quantity)
         sugar.push(dataArray[i].totalNutrients.SUGAR?.quantity ?? 0)
         protein.push(dataArray[i].totalNutrients.PROCNT?.quantity ?? 0)
         calcium.push(dataArray[i].totalNutrients.CA?.quantity ?? 0)
@@ -151,6 +160,7 @@ function App() {
         dailyPotassium.push(dataArray[i].totalDaily.K?.quantity ?? 0)
 
       }
+      
       setSearchResult(searchArray)
 
       //Summing all elements in nutrient arrays//
@@ -159,7 +169,10 @@ function App() {
       setTotalSaturatedFat(saturatedFat.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalPolyunsaturated(polyunsaturated.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalMonounsaturated(monounsaturated.reduce((a, b) => a + b, 0).toFixed(1))
-      setTotalTransFat(Number(totalMonounsaturated) + Number(totalPolyunsaturated))
+      setTotalTransFat(
+        Number(polyunsaturated.reduce((a, b) => a + b, 0).toFixed(1)) +
+        Number(monounsaturated.reduce((a, b) => a + b, 0).toFixed(1))
+      )
       setTotalChloesterol(chloesterol.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalSodium(sodium.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalCarb(carb.reduce((a, b) => a + b, 0).toFixed(1))
@@ -189,7 +202,6 @@ function App() {
 
   }
   
-  console.log(totalFiber)
 
   
   return (
@@ -203,15 +215,26 @@ function App() {
         }}
       >
        
-       
-        <div style={{display: 'flex', justifyContent: 'center', margin: '30px auto'}}>
-          <label
-            style={{fontSize: '2em', fontWeight: '500'}}
-          >
-            Search for any ingredient list
-          </label>
-        </div>
+        {isDesktop &&
+          <div style={{display: 'flex', justifyContent: 'center', margin: '30px auto'}}>
+            <label
+              style={{fontSize: '2em', fontWeight: '500'}}
+            >
+              Search for any ingredient list
+            </label>
+          </div>
+        }
         
+        
+        {isMobile &&
+          <div style={{display: 'flex', justifyContent: 'center', margin: '30px auto'}}>
+            <label
+              style={{fontSize: '1.5em', fontWeight: '500', textAlign: 'center'}}
+            >
+              Search for any ingredient list
+            </label>
+          </div>
+        }
 
 
         <div style={{marginTop: '50px'}}>
