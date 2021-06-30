@@ -6,10 +6,10 @@ const Button = styled.button `
     width: 110px;
     height: 40px;
     border: none;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
     color: #fff;
     font-size: 18px;
-    border-radius: 6px;
+    border-radius: 20px;
     outline: none;
     cursor: pointer;
     transition: .3s linear;

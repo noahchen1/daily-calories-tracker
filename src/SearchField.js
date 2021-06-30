@@ -14,7 +14,8 @@ const TextArea = styled.textarea `
     font-family: 'Roboto';
     letter-spacing: 0.5px;
     padding: 5px 0 5px 10px;
-
+    line-height: 25px;
+    overflow: hidden;
 
     @keyframes fade-in {
         0% {opacity: 0; transform: translateY(-10px); }
@@ -43,9 +44,8 @@ export default function SearchField({ingr, onChange}) {
                 type = "text"
                 value = {ingr}
                 onChange = {onChange}
-                placeholder = "search for ingredients"
+                placeholder = "1 whole apple &#13;&#10;2 oz pizza &#13;&#10;3 oz chicken thighs"
                 onClick = {handleClick}
-                
             >
             </TextArea>
         </div>

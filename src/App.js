@@ -159,7 +159,7 @@ function App() {
       setTotalSaturatedFat(saturatedFat.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalPolyunsaturated(polyunsaturated.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalMonounsaturated(monounsaturated.reduce((a, b) => a + b, 0).toFixed(1))
-      setTotalTransFat(totalMonounsaturated + totalPolyunsaturated)
+      setTotalTransFat(Number(totalMonounsaturated) + Number(totalPolyunsaturated))
       setTotalChloesterol(chloesterol.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalSodium(sodium.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalCarb(carb.reduce((a, b) => a + b, 0).toFixed(1))
@@ -188,6 +188,8 @@ function App() {
     })
 
   }
+  
+  console.log(totalFiber)
 
   
   return (
@@ -200,20 +202,31 @@ function App() {
           setShowNutrition(true)
         }}
       >
-
-        <label>Search for food</label>
-
+       
+       
+        <div style={{display: 'flex', justifyContent: 'center', margin: '30px auto'}}>
+          <label
+            style={{fontSize: '2em', fontWeight: '500'}}
+          >
+            Search for any ingredient list
+          </label>
+        </div>
         
-        <SearchField 
-            ingr = {ingr}
-            onChange = {e => setIngr(e.target.value)}                
-        /> 
+
+
+        <div style={{marginTop: '50px'}}>
+          <SearchField 
+              ingr = {ingr}
+              onChange = {e => setIngr(e.target.value)}                
+          /> 
+        </div>
+        
        
        <div 
         style={{
           display: "flex", 
           justifyContent: "center",
-          margin: "20px auto"
+          margin: "50px auto"
         }}
         >
           <AnalyzeButton 
@@ -225,7 +238,7 @@ function App() {
 
       </form>
       
-      <div>
+      <div style={{ margin: '100px auto' }}>
         {showChartTitle ? <ChartTitle /> : null}
         {searchResult.map(foodSearched => (
           <Chart 
@@ -241,7 +254,8 @@ function App() {
           <div 
             style={{
               display: 'flex', 
-              justifyContent: 'center'
+              justifyContent: 'center',
+              marginBottom: '50px'
               }}>
 
             <DailyValue
@@ -252,7 +266,7 @@ function App() {
               cholesterol = {totalChloesterol}
               sodium = {totalSodium}
               carbohydrate = {totalCarb}
-              dietaryFiber = {totalFiber ? 0 : totalFiber}
+              dietaryFiber = {totalFiber}
               totalSugar = {totalSugar}
               protein = {totalProtein}
               vitaminD = {totalVitaminD}

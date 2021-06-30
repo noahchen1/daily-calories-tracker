@@ -4,7 +4,13 @@ import styled from 'styled-components'
 const NutritionContainer = styled.div ` 
     max-width: 500px;
     width: 40%;
-    margin-top: 50px;
+    min-width: 320px;
+    animation: 1s ease-in-out forwards fade-in;
+
+    @keyframes fade-in {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
 `
 const NutritionGrid = styled.div `
     display: grid;
@@ -42,7 +48,7 @@ export default function DailyValue({calories, totalFat, dailyTotalFat, saturated
                 <span>{dailySaturatedFat}%</span>
                    
                 <span><b>Trans Fat</b> &nbsp; {transFat}g</span>
-                <span>3%</span>
+                <span></span>
             
                 <span><b>Cholesterol</b> &nbsp; {cholesterol}mg</span>
                 <span>{dailyCholesterol} %</span>
