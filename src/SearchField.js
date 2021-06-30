@@ -44,9 +44,10 @@ export default function SearchField({ingr, onChange}) {
                 type = "text"
                 value = {ingr}
                 onChange = {onChange}
-                placeholder = "1 whole apple &#10;2 oz pizza &#10;3 oz chicken thighs"
                 onClick = {handleClick}
-            >
+                placeholder = "1 whole apple 
+2 oz pizza
+3 oz chicken thighs">
             </TextArea>
         </div>
     )
