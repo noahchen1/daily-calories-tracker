@@ -30,6 +30,7 @@ export default function DailyValue({calories, totalFat, dailyTotalFat, saturated
             
             <DailyValueTittle style={{fontSize: "3em", fontWeight: "600"}}>
                 Daily Value
+                
             </DailyValueTittle>
                 
                
