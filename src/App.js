@@ -160,7 +160,7 @@ function App() {
         dailyPotassium.push(dataArray[i].totalDaily.K?.quantity ?? 0)
 
       }
-      
+
       setSearchResult(searchArray)
 
       //Summing all elements in nutrient arrays//
@@ -170,8 +170,8 @@ function App() {
       setTotalPolyunsaturated(polyunsaturated.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalMonounsaturated(monounsaturated.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalTransFat(
-        Number(polyunsaturated.reduce((a, b) => a + b, 0).toFixed(1)) +
-        Number(monounsaturated.reduce((a, b) => a + b, 0).toFixed(1))
+        (Number(polyunsaturated.reduce((a, b) => a + b, 0).toFixed(1)) +
+        Number(monounsaturated.reduce((a, b) => a + b, 0).toFixed(1))).toFixed(1)
       )
       setTotalChloesterol(chloesterol.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalSodium(sodium.reduce((a, b) => a + b, 0).toFixed(1))
