@@ -27,6 +27,7 @@ function App() {
   const [searchResult, setSearchResult] = useState([])
   const [showChartTitle, setShowChartTitle] = useState(false)
   const [showNutrition, setShowNutrition] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   // Initializing arrays for nutrients //
   const fat = []
@@ -62,8 +63,6 @@ function App() {
 
   const [totalFat, setTotalFat] = useState("")
   const [totalSaturatedFat, setTotalSaturatedFat] = useState("")
-  const [totalPolyunsaturated, setTotalPolyunsaturated] = useState("")
-  const [totalMonounsaturated, setTotalMonounsaturated] = useState("")
   const [totalTransFat, setTotalTransFat] = useState("")
   const [totalChloesterol, setTotalChloesterol] = useState("")
   const [totalSodium, setTotalSodium] = useState("")
@@ -96,6 +95,12 @@ function App() {
     const foodArray = []
     const searchArray = []
     const ingrArray = ingr.split(/(\s+)/).filter(e => String(e).trim())
+    
+    if (!isFinite(ingrArray[0])) {
+      setErrorMessage('Be sure to specify quantity and unit!')
+      return
+    }
+
     const array = ingrArray.reduce(
       (arrays, value) => (
         isFinite(value)
@@ -105,6 +110,7 @@ function App() {
       ),
       []
     )
+
 
     for (var i = 0; i < array.length; i++) {
       const foodName = array[i].splice(2).join(' ')
@@ -167,8 +173,6 @@ function App() {
 
       setTotalFat(fat.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalSaturatedFat(saturatedFat.reduce((a, b) => a + b, 0).toFixed(1))
-      setTotalPolyunsaturated(polyunsaturated.reduce((a, b) => a + b, 0).toFixed(1))
-      setTotalMonounsaturated(monounsaturated.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalTransFat(
         (Number(polyunsaturated.reduce((a, b) => a + b, 0).toFixed(1)) +
         Number(monounsaturated.reduce((a, b) => a + b, 0).toFixed(1))).toFixed(1)
@@ -202,10 +206,28 @@ function App() {
 
   }
   
-
   
   return (
-    <div>
+    <div style={{position: 'relative'}}>
+
+      {errorMessage && (
+        <div
+          style = {{
+            position: 'absolute',
+            width: '100%',
+            height: '500px',
+            textAlign: 'center'
+          }}
+        > 
+          <p
+            style = {{
+              marginTop: '120px',
+              fontSize: '2em'
+            }}
+          >
+            {errorMessage}</p>
+        </div>
+      )}
      
       <form
         onSubmit = {e => {
