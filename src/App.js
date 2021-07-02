@@ -4,6 +4,7 @@ import ChartTitle from './ChartTitle'
 import DailyValue from './DailyValue'
 import SearchField from './SearchField'
 import AnalyzeButton from './AnalyzeButton'
+import ErrorBubble from './ErrorBubble'
 import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 
@@ -208,27 +209,14 @@ function App() {
   
   
   return (
-    <div style={{position: 'relative'}}>
+    <div>
 
-      {errorMessage && (
-        <div
-          style = {{
-            position: 'absolute',
-            width: '100%',
-            height: '500px',
-            textAlign: 'center'
-          }}
-        > 
-          <p
-            style = {{
-              marginTop: '120px',
-              fontSize: '2em'
-            }}
-          >
-            {errorMessage}</p>
-        </div>
-      )}
-     
+     {errorMessage && 
+      <div style={{display: 'flex', justifyContent: 'center', position: 'relative'}}>
+        <ErrorBubble />
+      </div>
+      }
+
       <form
         onSubmit = {e => {
           e.preventDefault()
