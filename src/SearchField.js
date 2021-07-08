@@ -48,6 +48,7 @@ export default function SearchField({ingr, onChange}) {
                 onChange = {onChange}
                 onClick = {handleClick}
                 placeholder = '1 whole apple'
+                
             >
             </TextArea>
         </div>
