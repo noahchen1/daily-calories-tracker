@@ -97,6 +97,7 @@ function App() {
     const searchArray = []
     const ingrArray = ingr.split(/(\s+)/).filter(e => String(e).trim())
     
+    
     if (!isFinite(ingrArray[0])) {
       setErrorMessage('Be sure to specify quantity and unit!')
       return
