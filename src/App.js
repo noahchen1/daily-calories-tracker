@@ -102,6 +102,7 @@ function App() {
       setErrorMessage('Be sure to specify quantity and unit!')
       return
     }
+    
 
     const array = ingrArray.reduce(
       (arrays, value) => (
