@@ -131,6 +131,7 @@ function App() {
       return (await Promise.all(callPromises)).map(res => res.data)
     }
     
+    
 
     nutrition().then(data => {
 
