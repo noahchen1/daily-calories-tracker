@@ -105,15 +105,10 @@ function App() {
 
 
     const array = ingrArray.reduce(
-      (arrays, value) => (
-        isFinite(value)
-          ? arrays.push([value])
-          : arrays[arrays.length - 1].push(value),
-        arrays
-      ),
-      []
-    )
-
+      (arrays, value) => (isFinite(value)
+        ? arrays.push([value])
+        : arrays[arrays.length - 1].push(value),
+        arrays), [])
 
     for (var i = 0; i < array.length; i++) {
       const foodName = array[i].splice(2).join(' ')
@@ -277,12 +272,13 @@ function App() {
 
       <div style={{ margin: '100px auto' }}>
         {showChartTitle ? <ChartTitle /> : null}
-        {searchResult.map(foodSearched => (
+        {searchResult.map((foodSearched, idx) => (
           <Chart
             qty={foodSearched[0]}
             unit={foodSearched[1]}
             food={foodSearched[2]}
             calories={foodSearched[3]}
+            key={idx}
           />
         ))}
       </div>
