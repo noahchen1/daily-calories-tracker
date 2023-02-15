@@ -96,20 +96,20 @@ function App() {
     const foodArray = []
     const searchArray = []
     const ingrArray = ingr.split(/(\s+)/).filter(e => String(e).trim())
-    
-    
+
+
     if (!isFinite(ingrArray[0])) {
       setErrorMessage('Be sure to specify quantity and unit!')
       return
     }
-    
+
 
     const array = ingrArray.reduce(
       (arrays, value) => (
         isFinite(value)
           ? arrays.push([value])
           : arrays[arrays.length - 1].push(value),
-          arrays
+        arrays
       ),
       []
     )
@@ -128,17 +128,17 @@ function App() {
         return axios.get(`https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${searchArrayToString}`)
       })
 
-      return (await Promise.all(callPromises)).map(res => res.data)
+      return (await Promise.all(callPromises)).map(res => res.data);
     }
-    
-    
+
+
 
     nutrition().then(data => {
 
       const dataArray = data
 
-      for(var i=0; i < searchArray.length; i++) {
-        
+      for (var i = 0; i < searchArray.length; i++) {
+
         searchArray[i].push(dataArray[i].calories)
 
         dailyCalories.push(dataArray[i].calories)
@@ -179,7 +179,7 @@ function App() {
       setTotalSaturatedFat(saturatedFat.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalTransFat(
         (Number(polyunsaturated.reduce((a, b) => a + b, 0).toFixed(1)) +
-        Number(monounsaturated.reduce((a, b) => a + b, 0).toFixed(1))).toFixed(1)
+          Number(monounsaturated.reduce((a, b) => a + b, 0).toFixed(1))).toFixed(1)
       )
       setTotalChloesterol(chloesterol.reduce((a, b) => a + b, 0).toFixed(1))
       setTotalSodium(sodium.reduce((a, b) => a + b, 0).toFixed(1))
@@ -209,40 +209,40 @@ function App() {
     })
 
   }
-  
-  
+
+
   return (
     <div>
 
-     {errorMessage && 
-      <div style={{display: 'flex', justifyContent: 'center', position: 'relative'}}>
-        <ErrorBubble />
-      </div>
+      {errorMessage &&
+        <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
+          <ErrorBubble />
+        </div>
       }
 
       <form
-        onSubmit = {e => {
+        onSubmit={e => {
           e.preventDefault()
           setShowChartTitle(true)
           setShowNutrition(true)
         }}
       >
-       
+
         {isDesktop &&
-          <div style={{display: 'flex', justifyContent: 'center', margin: '30px auto'}}>
+          <div style={{ display: 'flex', justifyContent: 'center', margin: '30px auto' }}>
             <label
-              style={{fontSize: '2em', fontWeight: '500'}}
+              style={{ fontSize: '2em', fontWeight: '500' }}
             >
               Search for any ingredient list
             </label>
           </div>
         }
-        
-        
+
+
         {isMobile &&
-          <div style={{display: 'flex', justifyContent: 'center', margin: '30px auto'}}>
+          <div style={{ display: 'flex', justifyContent: 'center', margin: '30px auto' }}>
             <label
-              style={{fontSize: '1.5em', fontWeight: '500', textAlign: 'center'}}
+              style={{ fontSize: '1.5em', fontWeight: '500', textAlign: 'center' }}
             >
               Search for any ingredient list
             </label>
@@ -250,82 +250,82 @@ function App() {
         }
 
 
-        <div style={{marginTop: '50px'}}>
-          <SearchField 
-              ingr = {ingr}
-              onChange = {e => setIngr(e.target.value)}                
-          /> 
+        <div style={{ marginTop: '50px' }}>
+          <SearchField
+            ingr={ingr}
+            onChange={e => setIngr(e.target.value)}
+          />
         </div>
-        
-       
-       <div 
-        style={{
-          display: "flex", 
-          justifyContent: "center",
-          margin: "50px auto"
-        }}
-        >
-          <AnalyzeButton 
-              onClick = {handleSubmit}
-            />
-       </div>
-       
 
-        
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            margin: "50px auto"
+          }}
+        >
+          <AnalyzeButton
+            onClick={handleSubmit}
+          />
+        </div>
+
+
+
 
       </form>
-      
+
       <div style={{ margin: '100px auto' }}>
         {showChartTitle ? <ChartTitle /> : null}
         {searchResult.map(foodSearched => (
-          <Chart 
-            qty = {foodSearched[0]}
-            unit = {foodSearched[1]}
-            food = {foodSearched[2]}
-            calories = {foodSearched[3]}
+          <Chart
+            qty={foodSearched[0]}
+            unit={foodSearched[1]}
+            food={foodSearched[2]}
+            calories={foodSearched[3]}
           />
         ))}
       </div>
 
-        {showNutrition ? 
-          <div 
-            style={{
-              display: 'flex', 
-              justifyContent: 'center',
-              marginBottom: '50px'
-              }}>
+      {showNutrition ?
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: '50px'
+          }}>
 
-            <DailyValue
-              calories = {calories} 
-              totalFat = {totalFat}
-              saturatedFat = {totalSaturatedFat}
-              transFat = {totalTransFat}
-              cholesterol = {totalChloesterol}
-              sodium = {totalSodium}
-              carbohydrate = {totalCarb}
-              dietaryFiber = {totalFiber}
-              totalSugar = {totalSugar}
-              protein = {totalProtein}
-              vitaminD = {totalVitaminD}
-              calcium = {totalCalcium}
-              iron = {totalIron}
-              potassium = {totalPotassium}
+          <DailyValue
+            calories={calories}
+            totalFat={totalFat}
+            saturatedFat={totalSaturatedFat}
+            transFat={totalTransFat}
+            cholesterol={totalChloesterol}
+            sodium={totalSodium}
+            carbohydrate={totalCarb}
+            dietaryFiber={totalFiber}
+            totalSugar={totalSugar}
+            protein={totalProtein}
+            vitaminD={totalVitaminD}
+            calcium={totalCalcium}
+            iron={totalIron}
+            potassium={totalPotassium}
 
-              dailyTotalFat = {dailyTotalFat}
-              dailySaturatedFat = {dailyTotalSaturatedFat}
-              dailyCholesterol = {dailyTotalChloesterol}
-              dailySodium = {dailyTotalSodium}
-              dailyCarb = {dailyTotalCarb}
-              dailyFiber = {dailyTotalFiber}
-              dailyProtein = {dailyTotalProtein}
-              dailyVitaminD = {dailyTotalVitaminD}
-              dailyCalcium = {dailyTotalCalcium}
-              dailyIron = {dailyTotalIron}
-              dailyPotassium = {dailyTotalPotassium}
-            />
-          </div>
+            dailyTotalFat={dailyTotalFat}
+            dailySaturatedFat={dailyTotalSaturatedFat}
+            dailyCholesterol={dailyTotalChloesterol}
+            dailySodium={dailyTotalSodium}
+            dailyCarb={dailyTotalCarb}
+            dailyFiber={dailyTotalFiber}
+            dailyProtein={dailyTotalProtein}
+            dailyVitaminD={dailyTotalVitaminD}
+            dailyCalcium={dailyTotalCalcium}
+            dailyIron={dailyTotalIron}
+            dailyPotassium={dailyTotalPotassium}
+          />
+        </div>
 
-          : null}
+        : null}
     </div>
   )
 
